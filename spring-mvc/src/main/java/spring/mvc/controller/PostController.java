@@ -21,7 +21,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @PostMapping
+    @PostMapping("/v1")
     public ResponseEntity<PostResponse> create(@RequestBody PostRequest request) {
         final PostRequestDto requestDto = new PostRequestDto(
                 request.getTitle(),
@@ -37,7 +37,7 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping
+    @PostMapping("v2")
     public ResponseEntity<PostResponseDto> create2(@RequestBody PostRequest request) {
         final PostRequestDto requestDto = new PostRequestDto(
                 request.getTitle(),
