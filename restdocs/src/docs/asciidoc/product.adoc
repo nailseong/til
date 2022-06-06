@@ -1,0 +1,29 @@
+= Product API docs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[resources-product]]
+== 상품 관련 기능
+
+[[resources-product-find-by-id]]
+=== 상품 상세 조회
+
+[[resources-product-find-by-id-success]]
+==== Request path parameters
+
+include::{snippets}/find-by-id/path-parameters.adoc[]
+
+==== Response body
+
+include::{snippets}/find-by-id/response-fields.adoc[]
+
+==== 상품 상세 조회 성공
+
+===== HTTP Request
+
+include::{snippets}/find-by-id/http-request.adoc[]
+
+===== HTTP Response
+
+include::{snippets}/find-by-id/http-response.adoc[]
