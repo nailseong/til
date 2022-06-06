@@ -1,5 +1,6 @@
 package spring.restdocs.ui;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,8 @@ import spring.restdocs.ui.dto.ProductResponse;
 public class ProductController {
 
     @GetMapping("/{id}")
-    public ProductResponse findById(@PathVariable final Long id) {
-        return new ProductResponse(id, "치약", 1200, "원");
+    public ResponseEntity<ProductResponse> findById(@PathVariable final Long id) {
+        final ProductResponse response = new ProductResponse(id, "치약", 1200, "원");
+        return ResponseEntity.ok(response);
     }
 }
