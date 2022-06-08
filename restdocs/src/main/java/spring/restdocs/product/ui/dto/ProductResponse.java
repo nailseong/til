@@ -1,4 +1,4 @@
-package spring.restdocs.ui.dto;
+package spring.restdocs.product.ui.dto;
 
 public class ProductResponse {
 
