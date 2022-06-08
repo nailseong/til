@@ -21,7 +21,7 @@ public class CartController {
                         new ProductResponse(7L, "수박", 2000, "원"),
                         new ProductResponse(5L, "사과", 1600, "원")
                 )
-                .map(it -> new CartItemResponse(it.getId(), it))
+                .map(it -> new CartItemResponse(it.getId() - 2, it))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
