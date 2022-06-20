@@ -51,7 +51,7 @@ public class Logger {
                 toLevel(trace.getLevel(), EXCEPTION_SUFFIX),
                 traceStatus.getMessage(),
                 resultTimeMillis,
-                e.getMessage());
+                e.toString());
     }
 
     public void exception(final TraceStatus traceStatus, final Exception e) {
