@@ -20,11 +20,11 @@ public class OrderController {
     private final Logger logger;
 
     @GetMapping
-    public ResponseEntity<OrderResponse> save(@RequestParam final String name) {
-        final TraceStatus status = logger.begin("OrderController.save(\"" + name + "\")");
+    public ResponseEntity<OrderResponse> createOrder(@RequestParam final String name) {
+        final TraceStatus status = logger.begin("OrderController.createOrder(\"" + name + "\")");
         final OrderResponse response;
         try {
-            final String saveName = orderService.save(name);
+            final String saveName = orderService.orderItem(name);
             response = new OrderResponse(saveName);
         } catch (final Exception e) {
             logger.exception(status, e);

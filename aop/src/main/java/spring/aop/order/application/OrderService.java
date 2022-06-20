@@ -13,8 +13,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final Logger logger;
 
-    public String save(final String name) {
-        final TraceStatus status = logger.begin("OrderService.save(\"" + name + "\")");
+    public String orderItem(final String name) {
+        final TraceStatus status = logger.begin("OrderService.orderItem(\"" + name + "\")");
         final String saveName;
         try {
             saveName = orderRepository.save(name);
