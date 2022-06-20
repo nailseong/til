@@ -1,10 +1,8 @@
 package spring.aop.config.log;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
 public class ParamLogger implements Logger {
 
     private static final String BEGIN_SUFFIX = "-->";
