@@ -24,7 +24,7 @@ public class OrderController {
         final TraceStatus status = logger.begin("OrderController.save(\"" + name + "\")");
         final OrderResponse response;
         try {
-            final String saveName = orderService.save(name);
+            final String saveName = orderService.save(name, status.getTrace());
             response = new OrderResponse(saveName);
         } catch (final Exception e) {
             logger.exception(status, e);

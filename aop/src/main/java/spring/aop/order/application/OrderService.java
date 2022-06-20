@@ -3,6 +3,7 @@ package spring.aop.order.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import spring.aop.config.log.Logger;
+import spring.aop.config.log.Trace;
 import spring.aop.config.log.TraceStatus;
 import spring.aop.order.repository.OrderRepository;
 
@@ -13,11 +14,11 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final Logger logger;
 
-    public String save(final String name) {
-        final TraceStatus status = logger.begin("OrderService.save(\"" + name + "\")");
+    public String save(final String name, final Trace trace) {
+        final TraceStatus status = logger.beginSync(trace, "OrderService.save(\"" + name + "\")");
         final String saveName;
         try {
-            saveName = orderRepository.save(name);
+            saveName = orderRepository.save(name, status.getTrace());
         } catch (final Exception e) {
             logger.exception(status, e);
             throw e;

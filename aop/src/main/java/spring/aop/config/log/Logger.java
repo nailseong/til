@@ -27,11 +27,22 @@ public class Logger {
         if (level == 0) {
             return "";
         }
-        return "|" + DEPTH.repeat(level) + suffix;
+        return "|" + DEPTH.repeat(level - 1) + suffix;
     }
 
     public void end(final TraceStatus traceStatus) {
         complete(traceStatus, null);
+    }
+
+    public TraceStatus beginSync(final Trace beforeTrace, final String message) {
+        final Trace trace = beforeTrace.toNext();
+        final long startTimeMillis = System.currentTimeMillis();
+
+        log.info("[{}] {}{}",
+                trace.getId(),
+                toLevel(trace.getLevel(), BEGIN_SUFFIX),
+                message);
+        return new TraceStatus(trace, startTimeMillis, message);
     }
 
     private void complete(final TraceStatus traceStatus, final Exception e) {
