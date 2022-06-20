@@ -1,9 +1,9 @@
-package spring.aop.order.repository;
+package spring.threadlocal.order.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import spring.aop.config.log.Logger;
-import spring.aop.config.log.TraceStatus;
+import spring.threadlocal.config.log.Logger;
+import spring.threadlocal.config.log.TraceStatus;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package spring.aop.config.log;
+package spring.threadlocal.config.log;
 
 public interface Logger {
 

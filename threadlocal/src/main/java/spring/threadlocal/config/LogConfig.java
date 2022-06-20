@@ -1,9 +1,9 @@
-package spring.aop.config;
+package spring.threadlocal.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import spring.aop.config.log.FieldLogger;
-import spring.aop.config.log.Logger;
+import spring.threadlocal.config.log.FieldLogger;
+import spring.threadlocal.config.log.Logger;
 
 @Configuration
 public class LogConfig {

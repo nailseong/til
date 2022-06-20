@@ -1,18 +1,21 @@
-package spring.aop.config.log;
+package spring.threadlocal.config.log;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ParamLogger implements Logger {
+public class FieldLogger implements Logger {
 
     private static final String BEGIN_SUFFIX = "-->";
     private static final String END_SUFFIX = "<--";
     private static final String DEPTH = "   |";
     private static final String EXCEPTION_SUFFIX = "<X-";
 
+    private Trace traceHolder;
+
     @Override
     public TraceStatus begin(final String message) {
-        final Trace trace = new Trace();
+        syncTrace();
+        final Trace trace = traceHolder;
         final long startTimeMillis = System.currentTimeMillis();
 
         log.info("[{}] {}{}",
@@ -20,6 +23,14 @@ public class ParamLogger implements Logger {
                 toLevel(trace.getLevel(), BEGIN_SUFFIX),
                 message);
         return new TraceStatus(trace, startTimeMillis, message);
+    }
+
+    private void syncTrace() {
+        if (traceHolder == null) {
+            traceHolder = new Trace();
+            return;
+        }
+        traceHolder = traceHolder.toNext();
     }
 
     private String toLevel(final int level, final String suffix) {
@@ -34,21 +45,16 @@ public class ParamLogger implements Logger {
         complete(traceStatus, null);
     }
 
-    public TraceStatus beginSync(final Trace beforeTrace, final String message) {
-        final Trace trace = beforeTrace.toNext();
-        final long startTimeMillis = System.currentTimeMillis();
-
-        log.info("[{}] {}{}",
-                trace.getId(),
-                toLevel(trace.getLevel(), BEGIN_SUFFIX),
-                message);
-        return new TraceStatus(trace, startTimeMillis, message);
-    }
-
     private void complete(final TraceStatus traceStatus, final Exception e) {
         final Trace trace = traceStatus.getTrace();
         final long resultTimeMillis = System.currentTimeMillis() - traceStatus.getStartTimeMillis();
 
+        logResponse(traceStatus, e, trace, resultTimeMillis);
+        releaseTrace();
+    }
+
+    private void logResponse(final TraceStatus traceStatus, final Exception e, final Trace trace,
+                             final long resultTimeMillis) {
         if (e == null) {
             log.info("[{}] {}{} time={}ms",
                     trace.getId(),
@@ -63,6 +69,14 @@ public class ParamLogger implements Logger {
                 traceStatus.getMessage(),
                 resultTimeMillis,
                 e.toString());
+    }
+
+    private void releaseTrace() {
+        if (traceHolder.isInitialLevel()) {
+            traceHolder = null;
+            return;
+        }
+        traceHolder = traceHolder.toPrevious();
     }
 
     @Override

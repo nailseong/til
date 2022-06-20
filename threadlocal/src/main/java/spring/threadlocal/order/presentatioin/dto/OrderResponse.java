@@ -1,4 +1,4 @@
-package spring.aop.order.presentatioin.dto;
+package spring.threadlocal.order.presentatioin.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package spring.aop.config.log;
+package spring.threadlocal.config.log;
 
 import java.util.UUID;
 import lombok.AccessLevel;
