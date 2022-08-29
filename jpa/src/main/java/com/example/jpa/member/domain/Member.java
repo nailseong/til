@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-@Table(uniqueConstraints = {@UniqueConstraint(name = "uk_member_github_id", columnNames = {"github_id"})})
+@Table(uniqueConstraints = {@UniqueConstraint(name = "uk_member_github_id", columnNames = {"githubId"})})
 public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 50)
