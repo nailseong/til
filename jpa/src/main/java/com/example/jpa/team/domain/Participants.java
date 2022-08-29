@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import lombok.AccessLevel;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Participants {
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "participant",
             joinColumns = @JoinColumn(name = "team_id", nullable = false, foreignKey = @ForeignKey(name = "fk_team_participant")))
     private List<Participant> value;
