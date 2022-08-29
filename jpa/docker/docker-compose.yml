@@ -8,7 +8,7 @@ services:
       - "23306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: til
+      MYSQL_DATABASE: jpa
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       TZ: Asia/Seoul
